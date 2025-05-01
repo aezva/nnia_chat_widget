@@ -1,0 +1,314 @@
+.widgetContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-family: Arial, sans-serif;
+}
+
+.floatingIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-image: url('https://aezva.com/wp-content/uploads/2025/04/web-200x200-1.webp');
+  background-size: cover;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10001;
+}
+
+.welcomeBubble {
+  background-color: #FF9C9C;
+  color: black;
+  padding: 10px 14px;
+  border-radius: 20px;
+  max-width: 250px;
+  display: inline-block;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 80px;
+  right: 80px;
+  cursor: pointer;
+  z-index: 10000;
+  transition: opacity 0.3s ease;
+}
+
+.welcomeBubble.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chatBox {
+  width: 340px;
+  height: 460px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 10002;
+}
+
+.chatHeader {
+  background-color: white;
+  color: black;
+  padding: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+}
+
+.headerContent img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chatMessages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.message {
+  max-width: 80%;
+  margin: 8px 0;
+  padding: 10px 14px;
+  border-radius: 20px;
+  clear: both;
+  display: inline-block;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.niaMessage {
+  background-color: #FF9C9C;
+  color: black;
+  float: left;
+}
+
+.userMessage {
+  background-color: #e5e5e5;
+  color: black;
+  float: right;
+}
+
+.chatInputArea {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background-color: white;
+}
+
+.chatInput {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+}
+
+.chatInput:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.sendButton {
+  margin-left: 10px;
+  padding: 0 16px;
+  background-color: transparent;
+  color: #FF9C9C;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: color 0.3s;
+}
+
+.sendButton:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.sendButton:active:not(:disabled) {
+  color: black;
+}
+
+.minimizeButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  color: black;
+  cursor: pointer;
+}
+
+.typingIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.typingIndicator span {
+  width: 8px;
+  height: 8px;
+  margin: 0 2px;
+  background-color: #FF9C9C;
+  border-radius: 50%;
+  display: inline-block;
+  animation: typing 1s infinite;
+}
+
+.typingIndicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typingIndicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.alertsButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin-left: 10px;
+  padding: 5px;
+}
+
+.alertIcon {
+  font-size: 1.2em;
+}
+
+.alertBadge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ff4444;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.8em;
+  min-width: 18px;
+  text-align: center;
+}
+
+.alertsContainer {
+  padding: 15px;
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.alertsContainer h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+}
+
+.alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.alert.reminder {
+  border-left: 4px solid #ffd700;
+}
+
+.alert.task {
+  border-left: 4px solid #4caf50;
+}
+
+.alert.notification {
+  border-left: 4px solid #2196f3;
+}
+
+.alert.completed {
+  opacity: 0.7;
+  background-color: #e8f5e9;
+}
+
+.alert.dismissed {
+  opacity: 0.5;
+  background-color: #f5f5f5;
+}
+
+.alertContent {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.alertMessage {
+  margin-left: 10px;
+  flex: 1;
+}
+
+.alertDueDate {
+  display: block;
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 4px;
+}
+
+.alertActions {
+  display: flex;
+  gap: 5px;
+}
+
+.completeButton,
+.dismissButton {
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.completeButton {
+  background-color: #4caf50;
+  color: white;
+}
+
+.dismissButton {
+  background-color: #ff4444;
+  color: white;
+}
+
+.completeButton:hover {
+  background-color: #45a049;
+}
+
+.dismissButton:hover {
+  background-color: #ff3333;
+} 
