@@ -13,7 +13,7 @@ interface HistoryResponse {
   }>;
 }
 
-export class ChatService {
+class ChatService {
   private api: ReturnType<typeof axios.create>;
   private contextService: ContextService;
 
@@ -94,4 +94,6 @@ export class ChatService {
       console.error('Error saving message history:', error);
     }
   }
-} 
+}
+
+export default ChatService; 
