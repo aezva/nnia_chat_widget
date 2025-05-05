@@ -13,8 +13,9 @@ export default defineConfig({
     outDir: 'dist',
     lib: {
       entry: 'src/index.tsx',
-      name: 'NiaChatWidget',
-      fileName: 'nia-chat-widget'
+      name: 'NNIA',
+      fileName: 'nia-chat-widget',
+      formats: ['umd', 'es']
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
@@ -22,7 +23,8 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM'
-        }
+        },
+        exports: 'named'
       }
     }
   }

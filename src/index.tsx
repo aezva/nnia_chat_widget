@@ -54,11 +54,13 @@ const initWidget = (config: {
 };
 
 // Exportar al objeto global window
+const NNIA = {
+  initWidget
+};
+
 if (typeof window !== 'undefined') {
-  window.NNIA = {
-    initWidget
-  };
+  window.NNIA = NNIA;
 }
 
 export { initWidget };
-export default NiaChatWidget; 
+export default NNIA; 
