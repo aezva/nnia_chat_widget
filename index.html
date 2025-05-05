@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NNIA Chat Widget</title>
+    <script src="/nia-chat-widget.umd.js"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>NNIA Chat Widget</h1>
+    <p>Este es un widget de chat para sitios web.</p>
+
+    <script>
+        window.NNIA.initWidget({
+            apiUrl: 'https://api.iamnnia.com/api/v1',
+            clientID: 'test-client-id',
+            platform: 'client-website'
+        });
+    </script>
+</body>
+</html> 
