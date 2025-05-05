@@ -3,6 +3,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import ChatWidget from './components/ChatWidget';
+import './styles/ChatWidget.module.css';
 
 // Declarar tipos globales
 declare global {
@@ -48,12 +49,10 @@ const initWidget = (config: {
   try {
     const root = createRoot(container);
     root.render(
-      <NiaChatWidget 
+      <ChatWidget 
         apiUrl={config.apiUrl} 
-        context={{ 
-          platform: config.platform || 'client-website',
-          clientID: config.clientID
-        }} 
+        clientID={config.clientID || 'test-client-id'}
+        platform={config.platform || 'client-website'}
       />
     );
   } catch (error) {
