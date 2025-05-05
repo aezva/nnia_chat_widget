@@ -3,7 +3,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import ChatWidget from './components/ChatWidget';
-import './styles/ChatWidget.module.css';
+import styles from './styles/ChatWidget.module.css';
 
 // Declarar tipos globales
 declare global {
