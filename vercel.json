@@ -2,26 +2,5 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "vite",
-  "installCommand": "npm install",
-  "rewrites": [
-    { "source": "/nia-chat-widget.umd.js", "destination": "/nia-chat-widget.umd.js" },
-    { "source": "/nia-chat-widget.mjs", "destination": "/nia-chat-widget.mjs" },
-    { "source": "/style.css", "destination": "/style.css" }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    }
-  ]
+  "framework": "vite"
 }
