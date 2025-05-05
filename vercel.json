@@ -4,23 +4,10 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "installCommand": "npm install",
-  "routes": [
-    {
-      "src": "/nia-chat-widget.umd.js",
-      "dest": "/nia-chat-widget.umd.js"
-    },
-    {
-      "src": "/nia-chat-widget.mjs",
-      "dest": "/nia-chat-widget.mjs"
-    },
-    {
-      "src": "/style.css",
-      "dest": "/style.css"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
+  "rewrites": [
+    { "source": "/nia-chat-widget.umd.js", "destination": "/nia-chat-widget.umd.js" },
+    { "source": "/nia-chat-widget.mjs", "destination": "/nia-chat-widget.mjs" },
+    { "source": "/style.css", "destination": "/style.css" }
   ],
   "headers": [
     {
