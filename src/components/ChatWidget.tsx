@@ -16,10 +16,16 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ apiUrl, clientID, platform }) =
   const [messages, setMessages] = useState<Array<{ text: string; isUser: boolean }>>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [chatService, setChatService] = useState<ChatService | null>(null);
 
   useEffect(() => {
-    const chatService = new ChatService(apiUrl, clientID, platform);
-    // Aquí podrías inicializar el servicio de chat si es necesario
+    try {
+      const service = new ChatService(apiUrl, clientID, platform);
+      setChatService(service);
+    } catch (error) {
+      console.warn('Error inicializando el servicio de chat:', error);
+      // Continuamos con el widget incluso si hay error en la inicialización
+    }
   }, [apiUrl, clientID, platform]);
 
   const handleOpenChat = () => {
@@ -32,7 +38,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ apiUrl, clientID, platform }) =
   };
 
   const handleSendMessage = async () => {
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim() || isLoading) return;
 
     const userMessage = inputValue;
     setInputValue('');
@@ -40,14 +46,23 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ apiUrl, clientID, platform }) =
     setIsLoading(true);
 
     try {
-      // Aquí iría la lógica para enviar el mensaje al backend
-      // Por ahora, simulamos una respuesta
-      setTimeout(() => {
-        setMessages(prev => [...prev, { text: 'Gracias por tu mensaje. Estoy procesando tu consulta.', isUser: false }]);
-        setIsLoading(false);
-      }, 1000);
+      if (chatService) {
+        const response = await chatService.processMessage(userMessage);
+        setMessages(prev => [...prev, { text: response, isUser: false }]);
+      } else {
+        // Respuesta de fallback si el servicio no está disponible
+        setMessages(prev => [...prev, { 
+          text: 'Gracias por tu mensaje. Estoy procesando tu consulta.', 
+          isUser: false 
+        }]);
+      }
     } catch (error) {
       console.error('Error al enviar mensaje:', error);
+      setMessages(prev => [...prev, { 
+        text: 'Lo siento, hubo un error al procesar tu mensaje. Por favor, intenta de nuevo.', 
+        isUser: false 
+      }]);
+    } finally {
       setIsLoading(false);
     }
   };
@@ -67,16 +82,31 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ apiUrl, clientID, platform }) =
         </div>
       )}
       
-      <button className={styles.floatingIcon} onClick={handleOpenChat} />
+      <button 
+        className={styles.floatingIcon} 
+        onClick={handleOpenChat}
+        aria-label="Abrir chat"
+      />
 
       {isOpen && (
         <div className={styles.chatBox}>
           <div className={styles.chatHeader}>
             <div className={styles.headerContent}>
-              <img src="https://aezva.com/wp-content/uploads/2025/04/web-200x200-1.webp" alt="NNIA" />
+              <img 
+                src="https://aezva.com/wp-content/uploads/2025/04/web-200x200-1.webp" 
+                alt="NNIA" 
+                width="30"
+                height="30"
+              />
               <span>NNIA Chat</span>
             </div>
-            <button className={styles.closeButton} onClick={handleCloseChat}>×</button>
+            <button 
+              className={styles.closeButton} 
+              onClick={handleCloseChat}
+              aria-label="Cerrar chat"
+            >
+              ×
+            </button>
           </div>
 
           <div className={styles.chatBody}>
@@ -105,6 +135,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ apiUrl, clientID, platform }) =
               onKeyPress={handleKeyPress}
               placeholder="Escribe tu mensaje..."
               disabled={isLoading}
+              aria-label="Mensaje"
             />
           </div>
         </div>
