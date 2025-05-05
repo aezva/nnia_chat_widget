@@ -14,9 +14,9 @@ interface Config {
     };
 }
 
-const config: Config = {
-    apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1',
-    widgetId: process.env.NEXT_PUBLIC_WIDGET_ID || 'default-widget',
+const defaultConfig: Config = {
+    apiUrl: 'http://localhost:8000/api/v1',
+    widgetId: 'default-widget',
     theme: {
         primaryColor: '#4F46E5',
         secondaryColor: '#818CF8',
@@ -30,4 +30,4 @@ const config: Config = {
     },
 };
 
-export default config; 
+export default defaultConfig; 

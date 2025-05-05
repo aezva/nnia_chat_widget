@@ -28,10 +28,37 @@ class ChatService {
   private context: ChatContext;
   private clientInfo: ClientInfo | null = null;
   private API_BASE_URL: string;
+  private isAuthenticated: boolean = false;
 
   constructor(context: ChatContext, apiUrl: string = 'http://localhost:8000/api/v1') {
     this.context = context;
     this.API_BASE_URL = apiUrl;
+    this.validateClientID();
+  }
+
+  private async validateClientID() {
+    if (!this.context.clientID) {
+      console.warn('No clientID provided');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${this.API_BASE_URL}/client/validate?clientID=${this.context.clientID}`);
+      
+      if (!response.ok) {
+        throw new Error('Invalid clientID');
+      }
+
+      const data = await response.json();
+      this.isAuthenticated = data.valid;
+      
+      if (!this.isAuthenticated) {
+        console.error('Invalid clientID provided');
+      }
+    } catch (error) {
+      console.error('Error validating clientID:', error);
+      this.isAuthenticated = false;
+    }
   }
 
   private detectPlatform(): 'client-website' | 'client-panel' | 'social-media' {
@@ -222,6 +249,37 @@ class ChatService {
     } catch (error) {
       console.error('Error al actualizar el estado de la alerta:', error);
       return false;
+    }
+  }
+
+  async sendMessage(message: string): Promise<void> {
+    if (!this.isAuthenticated) {
+      throw new Error('Not authenticated. Please provide a valid clientID');
+    }
+
+    try {
+      const response = await fetch(`${this.API_BASE_URL}/chat/message`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Client-ID': this.context.clientID || '',
+        },
+        body: JSON.stringify({
+          message,
+          platform: this.context.platform,
+          conversationID: this.context.conversationID,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error sending message:', error);
+      throw error;
     }
   }
 }

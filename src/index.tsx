@@ -4,6 +4,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ChatWidget from './components/ChatWidget';
 
+// Declarar tipos globales
+declare global {
+  interface Window {
+    NNIA: {
+      initWidget: (config: {
+        apiUrl: string;
+        clientID?: string;
+        platform?: 'client-website' | 'client-panel' | 'social-media';
+      }) => void;
+    }
+  }
+}
+
 interface NiaChatWidgetProps {
   apiUrl: string;
   context: {
@@ -17,24 +30,35 @@ const NiaChatWidget: React.FC<NiaChatWidgetProps> = ({ apiUrl, context }) => {
   return <ChatWidget apiUrl={apiUrl} context={context} />;
 };
 
-const initWidget = () => {
+const initWidget = (config: {
+  apiUrl: string;
+  clientID?: string;
+  platform?: 'client-website' | 'client-panel' | 'social-media';
+}) => {
   const container = document.createElement('div');
   container.id = 'nia-widget-container';
   document.body.appendChild(container);
 
   ReactDOM.render(
     <React.StrictMode>
-      <NiaChatWidget apiUrl="https://example.com" context={{ platform: 'client-website' }} />
+      <NiaChatWidget 
+        apiUrl={config.apiUrl} 
+        context={{ 
+          platform: config.platform || 'client-website',
+          clientID: config.clientID
+        }} 
+      />
     </React.StrictMode>,
     container
   );
 };
 
-// Inicializar el widget cuando el DOM esté listo
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initWidget);
-} else {
-  initWidget();
+// Exportar al objeto global window
+if (typeof window !== 'undefined') {
+  window.NNIA = {
+    initWidget
+  };
 }
 
+export { initWidget };
 export default NiaChatWidget; 
