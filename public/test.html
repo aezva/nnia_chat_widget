@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test NNIA Widget</title>
+    <script src="https://widget.iamnnia.com/nia-chat-widget.umd.js"></script>
+    <link rel="stylesheet" href="https://widget.iamnnia.com/style.css">
+</head>
+<body>
+    <h1>Página de prueba para NNIA Widget</h1>
+    <p>Deberías ver el widget de chat en la esquina inferior derecha.</p>
+
+    <script>
+        window.NNIA.initWidget({
+            apiUrl: 'https://api.iamnnia.com/api/v1',
+            clientID: 'test-client-id',
+            platform: 'client-website'
+        });
+    </script>
+</body>
+</html> 

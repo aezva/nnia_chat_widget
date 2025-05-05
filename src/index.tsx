@@ -54,13 +54,13 @@ const initWidget = (config: {
 };
 
 // Exportar al objeto global window
-const NNIA = {
-  initWidget
-};
-
 if (typeof window !== 'undefined') {
-  window.NNIA = NNIA;
+  window.NNIA = {
+    initWidget
+  };
 }
 
 export { initWidget };
-export default NNIA; 
+export default {
+  initWidget
+}; 
