@@ -29,11 +29,12 @@ export default defineConfig({
       fileName: (format) => `nia-chat-widget.${format === 'es' ? 'mjs' : 'umd.js'}`
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', 'axios'],
       output: {
         globals: {
           react: 'React',
-          'react-dom': 'ReactDOM'
+          'react-dom': 'ReactDOM',
+          'axios': 'axios'
         },
         exports: 'named',
         assetFileNames: (assetInfo) => {

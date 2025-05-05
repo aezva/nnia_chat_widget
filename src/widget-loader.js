@@ -30,6 +30,9 @@
             await loadScript('https://unpkg.com/react@18/umd/react.production.min.js');
             await loadScript('https://unpkg.com/react-dom@18/umd/react-dom.production.min.js');
             
+            // Cargar Axios
+            await loadScript('https://unpkg.com/axios/dist/axios.min.js');
+            
             // Cargar CSS del widget
             await loadCSS('https://widget.iamnnia.com/nia-chat-widget.css');
             
