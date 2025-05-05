@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/ChatWidget.module.css';
-import ChatService from '../services/ChatService';
+import { ChatService } from '../services/chat';
+import { NNIAContext } from '../services/context';
 
 interface ChatWidgetProps {
   apiUrl: string;
   clientID: string;
-  platform: string;
+  platform: 'client-website' | 'client-panel' | 'social-media';
 }
 
 const ChatWidget: React.FC<ChatWidgetProps> = ({ apiUrl, clientID, platform }) => {
@@ -20,7 +21,11 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ apiUrl, clientID, platform }) =
 
   useEffect(() => {
     try {
-      const service = new ChatService(apiUrl, clientID, platform);
+      const context: NNIAContext = {
+        platform,
+        clientID,
+      };
+      const service = new ChatService(context, apiUrl);
       setChatService(service);
     } catch (error) {
       console.warn('Error inicializando el servicio de chat:', error);
