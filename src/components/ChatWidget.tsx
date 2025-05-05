@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/ChatWidget.module.css';
-import ChatService from '../services/ChatService';
+import ChatService from '../services/chatService';
 
 interface ChatWidgetProps {
   apiUrl: string;

@@ -18,19 +18,6 @@ declare global {
   }
 }
 
-interface NiaChatWidgetProps {
-  apiUrl: string;
-  context: {
-    platform: 'client-website' | 'client-panel' | 'social-media';
-    clientID?: string;
-    conversationID?: string;
-  };
-}
-
-const NiaChatWidget: React.FC<NiaChatWidgetProps> = ({ apiUrl, context }) => {
-  return <ChatWidget apiUrl={apiUrl} context={context} />;
-};
-
 const initWidget = (config: {
   apiUrl: string;
   clientID?: string;
