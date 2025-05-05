@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import styles from '../styles/ChatWidget.module.css';
-import ChatService from '../services/chat';
-import { NNIAContext } from '../services/context';
+import styles from '@/styles/ChatWidget.module.css';
+import ChatService from '@/services/chat';
+import { NNIAContext } from '@/services/context';
 
 interface ChatWidgetProps {
   apiUrl: string;
