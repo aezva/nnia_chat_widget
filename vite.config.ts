@@ -28,8 +28,10 @@ export default defineConfig({
           'react-dom': 'ReactDOM'
         },
         exports: 'named',
-        assetFileNames: 'style.css',
-        inlineDynamicImports: true
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'style.css') return 'nia-chat-widget.css';
+          return assetInfo.name;
+        }
       }
     },
     commonjsOptions: {
