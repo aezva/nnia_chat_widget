@@ -24,7 +24,7 @@
     };
 
     // Función principal de inicialización
-    const initNNIA = async (config) => {
+    const initNNIA = async (clientID) => {
         try {
             // Cargar React y ReactDOM
             await loadScript('https://unpkg.com/react@18/umd/react.production.min.js');
@@ -36,9 +36,13 @@
             // Cargar el widget
             await loadScript('https://widget.iamnnia.com/nia-chat-widget.umd.js');
             
-            // Inicializar el widget
+            // Inicializar el widget con configuración por defecto
             if (window.NNIA) {
-                window.NNIA.initWidget(config);
+                window.NNIA.initWidget({
+                    apiUrl: 'https://api.iamnnia.com/api/v1',
+                    clientID: clientID,
+                    platform: 'client-website'
+                });
             }
         } catch (error) {
             console.error('Error al cargar el widget NNIA:', error);
