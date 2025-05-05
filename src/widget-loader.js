@@ -34,10 +34,10 @@
             await loadScript('https://unpkg.com/axios/dist/axios.min.js');
             
             // Cargar CSS del widget
-            await loadCSS('https://widget.iamnnia.com/nia-style.css');
+            await loadCSS('https://widget.iamnnia.com/nia-chat-widget.css');
             
             // Cargar el widget
-            await loadScript('https://widget.iamnnia.com/nia-chat.js');
+            await loadScript('https://widget.iamnnia.com/nia-chat-widget.umd.js');
             
             // Inicializar el widget con configuración por defecto
             if (window.NNIA) {
