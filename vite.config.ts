@@ -28,8 +28,13 @@ export default defineConfig({
           'react-dom': 'ReactDOM'
         },
         exports: 'named',
-        assetFileNames: 'style.css'
+        assetFileNames: 'style.css',
+        inlineDynamicImports: true
       }
+    },
+    commonjsOptions: {
+      include: [/node_modules/],
+      transformMixedEsModules: true
     }
   },
   publicDir: 'public'
