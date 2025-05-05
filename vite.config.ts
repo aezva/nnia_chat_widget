@@ -26,7 +26,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.tsx'),
       name: 'NNIA',
-      fileName: (format) => `nia-chat-widget.${format === 'es' ? 'mjs' : 'umd.js'}`
+      fileName: (format) => `nia-chat.${format === 'es' ? 'mjs' : 'js'}`
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'axios'],
@@ -38,7 +38,7 @@ export default defineConfig({
         },
         exports: 'named',
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'nia-chat-widget.css';
+          if (assetInfo.name === 'style.css') return 'nia-style.css';
           return assetInfo.name;
         }
       }

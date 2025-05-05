@@ -34,10 +34,10 @@
             await loadScript('https://unpkg.com/axios/dist/axios.min.js');
             
             // Cargar CSS del widget
-            await loadCSS('https://widget.iamnnia.com/nia-chat-widget.css');
+            await loadCSS('https://widget.iamnnia.com/nia-style.css');
             
             // Cargar el widget
-            await loadScript('https://widget.iamnnia.com/nia-chat-widget.umd.js');
+            await loadScript('https://widget.iamnnia.com/nia-chat.js');
             
             // Inicializar el widget con configuración por defecto
             if (window.NNIA) {
@@ -46,6 +46,8 @@
                     clientID: clientID,
                     platform: 'client-website'
                 });
+            } else {
+                console.error('El widget NNIA no se ha cargado correctamente');
             }
         } catch (error) {
             console.error('Error al cargar el widget NNIA:', error);
