@@ -2,8 +2,8 @@
   "name": "@nia/chat-widget",
   "version": "1.0.0",
   "private": false,
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "main": "dist/nia-chat-widget.umd.js",
+  "module": "dist/nia-chat-widget.mjs",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
