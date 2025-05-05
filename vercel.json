@@ -21,8 +21,16 @@
       }
     },
     {
-      "src": "/style.css",
-      "dest": "/style.css",
+      "src": "/widget-loader.umd.js",
+      "dest": "/widget-loader.umd.js",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable",
+        "Access-Control-Allow-Origin": "*"
+      }
+    },
+    {
+      "src": "/nia-chat-widget.css",
+      "dest": "/nia-chat-widget.css",
       "headers": {
         "cache-control": "public, max-age=31536000, immutable",
         "Access-Control-Allow-Origin": "*"
