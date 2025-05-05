@@ -4,6 +4,8 @@
   right: 20px;
   z-index: 9999;
   font-family: Arial, sans-serif;
+  width: auto;
+  height: auto;
 }
 
 .floatingIcon {
@@ -20,6 +22,11 @@
   bottom: 20px;
   right: 20px;
   z-index: 10001;
+  transition: transform 0.3s ease;
+}
+
+.floatingIcon:hover {
+  transform: scale(1.1);
 }
 
 .welcomeBubble {
@@ -31,11 +38,13 @@
   display: inline-block;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   position: fixed;
-  bottom: 80px;
-  right: 80px;
+  bottom: 90px;
+  right: 90px;
   cursor: pointer;
   z-index: 10000;
   transition: opacity 0.3s ease;
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 .welcomeBubble.hidden {
@@ -67,11 +76,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid #eee;
 }
 
 .headerContent {
   display: flex;
   align-items: center;
+  font-size: 16px;
 }
 
 .headerContent img {
@@ -81,10 +92,11 @@
   margin-right: 10px;
 }
 
-.chatMessages {
+.chatBody {
   flex: 1;
-  padding: 10px;
+  padding: 15px;
   overflow-y: auto;
+  background-color: #f9f9f9;
 }
 
 .message {
@@ -95,59 +107,89 @@
   clear: both;
   display: inline-block;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 .niaMessage {
   background-color: #FF9C9C;
   color: black;
   float: left;
+  margin-right: auto;
 }
 
 .userMessage {
   background-color: #e5e5e5;
   color: black;
   float: right;
+  margin-left: auto;
 }
 
-.chatInputArea {
-  display: flex;
+.chatFooter {
   padding: 10px;
-  border-top: 1px solid #ddd;
   background-color: white;
+  border-top: 1px solid #eee;
+  display: flex;
+  align-items: center;
 }
 
-.chatInput {
+.chatFooter input {
   flex: 1;
-  padding: 10px;
+  padding: 10px 15px;
   border: 1px solid #ddd;
   border-radius: 20px;
   outline: none;
+  font-size: 14px;
+  margin-right: 10px;
 }
 
-.chatInput:disabled {
-  background-color: #f5f5f5;
-  cursor: not-allowed;
+.chatFooter input:focus {
+  border-color: #FF9C9C;
 }
 
-.sendButton {
-  margin-left: 10px;
-  padding: 0 16px;
-  background-color: transparent;
-  color: #FF9C9C;
+.closeButton {
+  background: none;
   border: none;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 20px;
-  transition: color 0.3s;
-}
-
-.sendButton:disabled {
-  color: #ccc;
-  cursor: not-allowed;
-}
-
-.sendButton:active:not(:disabled) {
+  font-size: 24px;
+  line-height: 1;
   color: black;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.closeButton:hover {
+  background-color: #f0f0f0;
+}
+
+.loadingIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  gap: 4px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: #FF9C9C;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+.dot:nth-child(1) { animation-delay: -0.32s; }
+.dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
 }
 
 .minimizeButton {
