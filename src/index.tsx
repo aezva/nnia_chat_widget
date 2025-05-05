@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import ChatWidget from './components/ChatWidget';
 
 // Declarar tipos globales
@@ -39,7 +39,8 @@ const initWidget = (config: {
   container.id = 'nia-widget-container';
   document.body.appendChild(container);
 
-  ReactDOM.render(
+  const root = createRoot(container);
+  root.render(
     <React.StrictMode>
       <NiaChatWidget 
         apiUrl={config.apiUrl} 
@@ -48,8 +49,7 @@ const initWidget = (config: {
           clientID: config.clientID
         }} 
       />
-    </React.StrictMode>,
-    container
+    </React.StrictMode>
   );
 };
 
