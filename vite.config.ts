@@ -14,7 +14,10 @@ export default defineConfig({
     }
   },
   define: {
-    'process.env': {}
+    'process.env': {
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      VITE_WIDGET_VERSION: JSON.stringify(process.env.npm_package_version)
+    }
   },
   resolve: {
     alias: {
@@ -26,8 +29,8 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.tsx'),
       name: 'NNIA',
-      formats: ['umd'],
-      fileName: () => 'nia-chat.js'
+      formats: ['umd', 'es'],
+      fileName: (format) => `nia-chat-widget.${format === 'es' ? 'mjs' : 'umd.js'}`
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'axios'],
@@ -40,13 +43,22 @@ export default defineConfig({
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') return 'nia-style.css';
           return assetInfo.name;
-        }
+        },
+        manualChunks: undefined
       }
     },
     commonjsOptions: {
       include: [/node_modules/],
       transformMixedEsModules: true
-    }
+    },
+    minify: 'terser',
+    sourcemap: true,
+    target: 'es2015'
   },
-  publicDir: 'public'
+  publicDir: 'public',
+  server: {
+    port: 3000,
+    strictPort: true,
+    cors: true
+  }
 }); 

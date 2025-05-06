@@ -3,13 +3,32 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-Requested-With, Content-Type, Accept"
+        }
+      ]
+    }
+  ],
   "routes": [
     {
       "src": "/nia-chat-widget.umd.js",
       "dest": "/nia-chat-widget.umd.js",
       "headers": {
         "cache-control": "public, max-age=31536000, immutable",
-        "Access-Control-Allow-Origin": "*"
+        "content-type": "application/javascript"
       }
     },
     {
@@ -17,28 +36,31 @@
       "dest": "/nia-chat-widget.mjs",
       "headers": {
         "cache-control": "public, max-age=31536000, immutable",
-        "Access-Control-Allow-Origin": "*"
+        "content-type": "application/javascript"
       }
     },
     {
-      "src": "/widget-loader.umd.js",
-      "dest": "/widget-loader.umd.js",
+      "src": "/widget-loader.js",
+      "dest": "/widget-loader.js",
       "headers": {
         "cache-control": "public, max-age=31536000, immutable",
-        "Access-Control-Allow-Origin": "*"
+        "content-type": "application/javascript"
       }
     },
     {
-      "src": "/nia-chat-widget.css",
-      "dest": "/nia-chat-widget.css",
+      "src": "/nia-style.css",
+      "dest": "/nia-style.css",
       "headers": {
         "cache-control": "public, max-age=31536000, immutable",
-        "Access-Control-Allow-Origin": "*"
+        "content-type": "text/css"
       }
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/index.html",
+      "headers": {
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
     }
   ]
 }
